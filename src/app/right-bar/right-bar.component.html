@@ -1,0 +1,40 @@
+<div class="container">
+  <nav class="navbar flex-centered">
+    <div class="menu flex-centered">
+      <a (click)="isToday = true" [ngClass]="{'active' : isToday}">Today</a>
+      <a (click)="isToday = false" [ngClass]="{'active' : !isToday}">Week</a>
+    </div>
+    <div class="temperature flex-centered">
+      <button [ngClass]="{'activated' : isCelsius, 'not-activated-button' : !isCelsius}" (click)="onCelsius()" class="c flex-centered" [disabled]="isCelsius">
+        <span [ngClass]="{'activated-span' : isCelsius}">°C</span>
+      </button>
+      <button [ngClass]="{'activated' : !isCelsius, 'not-activated-button' : isCelsius}" (click)="onFahrenheit()" class="f flex-centered" [disabled]="!isCelsius">
+        <span [ngClass]="{'activated-span' : !isCelsius}">°F</span>
+      </button>
+    </div>
+  </nav>
+  <div class="div flex-centered">
+    <div *ngIf="isToday" [@Today] class="forcast-boards flex-centered">
+      <app-forcast-board  *ngFor="let hour of hourly" [item]="hour" [isDay]="true"></app-forcast-board>
+    </div>
+    <div *ngIf="!isToday" [@Week] class="forcast-boards flex-centered">
+      <app-forcast-board *ngFor="let day of daily" [item]="day" [isDay]="!true"></app-forcast-board>
+    </div>
+  </div>
+  <h2 class="highlights-title">Today’s Highlights</h2>
+  <div class="highlights-container flex-centered">
+    <div class="highlights">
+      <div class="first-line flex-centered">
+        <app-uv-index></app-uv-index>
+        <app-wind-status></app-wind-status>
+        <app-sun-status></app-sun-status>
+      </div>
+      <div class="second-line flex-centered">
+        <app-humidity></app-humidity>
+        <app-visibility></app-visibility>
+        <app-Max-min-temp></app-Max-min-temp>
+      </div>
+    </div>
+    <app-map></app-map>
+  </div>
+</div>

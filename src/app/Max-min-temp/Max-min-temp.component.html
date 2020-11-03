@@ -1,0 +1,13 @@
+<div class="container flex">
+  <h1>Min/max temperature</h1>
+  <div class="hot flex-centered">
+    <img class="icon" src="assets/imgs/hot.svg">
+    <span *ngIf="data">{{isCelsius ? (data.daily[0].temp.max | celsius) : (data.daily[0].temp.max | fahrenheit)}}</span>
+    <span class="c">{{isCelsius ? 'C' : 'F'}}</span>
+  </div>
+  <div class="cold flex-centered">
+    <img class="icon" src="assets/imgs/cold.svg">
+    <span *ngIf="data">{{isCelsius ? (data.daily[0].temp.min | celsius) : (data.daily[0].temp.min | fahrenheit)}}</span>
+    <span class="c">{{isCelsius ? 'C' : 'F'}}</span>
+  </div>
+</div>

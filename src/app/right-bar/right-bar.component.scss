@@ -1,0 +1,121 @@
+.container{
+    width: 100%;
+    max-width: 1420px;
+    height: 100vh;
+    padding: 40px 60px;
+    background: #F6F6F8;
+    overflow: hidden
+}
+
+a{
+    font-weight: bold;
+    font-size: 30px;
+    color: #BBBBBB;
+    margin-right: 50px;
+    cursor: pointer;
+    text-decoration: none;
+}
+a:hover{
+    color: #cfcfcf;
+}
+.active {
+    color: #000;
+}
+.active:hover {
+    color: #000;
+}
+.temperature{
+    margin-left: auto;
+    button{
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        justify-content: center;
+    }
+    span{
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .not-activated-button{
+        transition: all .2s ease-in-out;
+    }
+    .not-activated-button:hover{
+        transform: scale(1.1);
+        background: #F6F6F8;
+    }
+    .activated-span{
+        color: #fff;
+    }
+    .activated{
+        background: #000;
+    }
+}
+
+.f{
+    margin-left: 20px;
+}
+
+.div{
+    position: relative;
+    height: 200px;
+}
+
+.forcast-boards{
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 70px;
+    z-index: 2;
+    position: absolute;
+}
+
+.highlights-title{
+    margin-top: 80px;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.highlights-container{
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.highlights{
+    width: 100%;
+}
+
+.first-line{
+    justify-content: space-between;
+}
+
+.second-line{
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+app-map{
+    margin-left: 30px;
+}
+app-forcast-board,
+app-uv-index,
+app-wind-status,
+app-sun-status,
+app-humidity,
+app-visibility,
+app-Max-min-temp,
+app-map{ transition: all .2s ease-in-out; }
+
+app-uv-index:hover,
+app-wind-status:hover,
+app-sun-status:hover,
+app-humidity:hover,
+app-visibility:hover,
+app-Max-min-temp:hover,
+app-map:hover { transform: scale(1.1); }
+
+app-forcast-board:hover { transform: scale(1.2); }

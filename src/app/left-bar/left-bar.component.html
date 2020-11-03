@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="search-bar flex">
+    <div class="search flex">
+      <img class="icon" src="assets/imgs/search.svg">
+      <input  #search type="text" placeholder="search for places ..." >
+    </div>
+    <button (click)="homeLocation()" class="home-btn">
+      <img  class="icon" src="assets/imgs/home.svg">
+    </button>
+  </div>
+  <div *ngIf="searchData.length > 0" class="results">
+    <div *ngFor="let res of searchData" class="result" (mousedown)="changeLocation(res)">
+      <h3 class="city">{{res.city}}</h3>
+      <h3 class="country">{{res.country}}</h3>
+    </div>
+    
+  </div>
+  <div class="weather-img">
+    <img class="weather-icon" src={{icon.getWeatherImg(iconId)}}>
+  </div>
+  <div class="temperature flex">
+    <h1 *ngIf="data">{{isCelsius ? (data.current.temp | celsius) : (data.current.temp | fahrenheit)}}</h1>
+    <span>{{isCelsius ? 'C' : 'F'}}</span>
+  </div>
+  <div class="location">
+    <h2 *ngIf="loc">{{loc.city}}, {{loc.country_name}}</h2>
+  </div>
+  <div class="date flex">
+    <span class="day">{{weekday}},</span>
+    <span *ngIf="data" class="time">{{ data.current.dt | date }}</span>
+  </div>
+  <hr>
+  <div class="features">
+    <app-features-board *ngFor="let item of Weather" [item]="item"></app-features-board>
+  </div>
+</div>

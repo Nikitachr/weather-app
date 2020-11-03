@@ -1,0 +1,9 @@
+<div class="container flex-centered">
+  <h2 class="date">{{isDay ? (item.dt | date) : (item.dt | weekday)}}</h2>
+  <img class="icon" src={{icon.getWeatherImg(iconId)}}>
+  <div class="temperature flex-centered">
+    <span *ngIf="isDay" class="highest-temp">{{isCelsius ? (item.temp | celsius) : (item.temp | fahrenheit)}}</span>
+    <span *ngIf="!isDay" class="highest-temp">{{isCelsius ? (item.temp.max | celsius) : (item.temp.max | fahrenheit)}}</span>
+    <span *ngIf="!isDay" class="lowest-temp">{{isCelsius ? (item.temp.min | celsius) : (item.temp.min | fahrenheit)}}</span>
+  </div>
+</div>

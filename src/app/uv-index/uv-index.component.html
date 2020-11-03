@@ -1,0 +1,9 @@
+<div class="container flex">
+  <h1>UV Index</h1>
+  <canvas #myCanvas width="230"></canvas>
+  <span class="six">6</span>
+  <span class="nine">9</span>
+  <span class="twelve">12</span>
+  <h2 class="value | round" *ngIf="data">{{data.current.uvi | round}}</h2>
+  
+</div>

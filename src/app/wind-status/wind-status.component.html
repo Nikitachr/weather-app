@@ -1,0 +1,8 @@
+<div class="container flex">
+  <h1>Wind Status</h1>
+  <div class="wind-speed flex">
+    <h2 *ngIf="data">{{data.current.wind_speed | round}}</h2>
+    <span>km/h</span>
+  </div>
+  <span class="grade">{{estimation}}</span>
+</div>

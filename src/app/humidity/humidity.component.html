@@ -1,0 +1,11 @@
+<div class="container flex">
+  <h1>Humidity</h1>
+  <div class="humidity flex">
+    <h2 *ngIf="data">{{data.current.humidity}}</h2>
+    <span>%</span>
+    <div class="scale">
+      <div *ngIf="data" [ngStyle]="{'height': scale + 'px'}" class="circle" ></div>
+    </div>
+  </div>
+  <span class="grade">{{estimation}}</span>
+</div>

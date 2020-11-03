@@ -1,0 +1,11 @@
+<div class="container flex">
+  <h1>Sunrise & Sunset</h1>
+  <div class="sunrise flex-centered">
+    <img class="icon" src="assets/imgs/sunrise.svg">
+    <span *ngIf="data">{{data.current.sunrise | ampm}}</span>
+  </div>
+  <div class="sunset flex-centered">
+    <img class="icon" src="assets/imgs/sunset.svg">
+    <span *ngIf="data">{{data.current.sunset | ampm}}</span>
+  </div>
+</div>
