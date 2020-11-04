@@ -11,7 +11,11 @@ export class LocationService {
 constructor(private http: HttpClient) { }
   
 
+  //getLocation(ip: any){
+  //  return this.http.get(`http://api.ipapi.com/${ip.ip}?access_key=${environment.ipApi}&format=1`)
+  //}
   getLocation(ip: any){
-    return this.http.get(`http://api.ipapi.com/${ip.ip}?access_key=${environment.ipApi}&format=1`)
+    return this.http.get(`https://ipinfo.io/${ip.ip}?token=9c3144effe17d1`)
   }
+  
 }

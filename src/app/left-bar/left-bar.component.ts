@@ -45,22 +45,28 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   
   ngOnInit() {
     
+    
     if(localStorage.getItem('location')){
       this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
     } else {
       this.http.get("https://api.ipify.org/?format=json").subscribe(ip => {
-        console.log(ip);
-        this.location.getLocation(ip).subscribe(location => {
+        this.location.getLocation(ip).subscribe((res: any) => {
+        var loc = res.loc.split(',');
+        var location = {
+          city: res.city,
+          country: res.country,
+          latitude: loc[0],
+          longitude: loc[1]
+        };
          localStorage.setItem('location', JSON.stringify(location));
           this.store.dispatch(new LoadLocations({locationData: location}));
         }, err => console.log(err));
       }, err => console.log(err));   
-    }
+    } 
     
     this.data$ = this.store.select(selectWeather);
     this.data$.subscribe(res => {
       if (res) {
-        console.log(res);
         this.data = res;
         this.Weather = res.current.weather;
         this.iconId = this.data.current.weather[0].id;
@@ -70,7 +76,6 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     this.location$ = this.store.select(selectLocation)
     this.location$.subscribe(res => {
       this.loc = res;
-      console.log(res);
     });
 
     this.isCelsius$ = this.store.select(selectUnits);
@@ -80,6 +85,29 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
+    this.subscribe();
+  }
+  
+  changeLocation(item: any){
+    this.searchData = [];
+    this.filter.nativeElement.value = ''
+    this.store.dispatch(new LoadLocations({locationData: item}));
+    this.subscribe();
+  }
+  search(value: string){
+    return this.http.get(`https://rapidapi.p.rapidapi.com/v1/geo/cities?minPopulation=50000&namePrefix=${value}`, { headers: this.headers });
+  }
+  
+  homeLocation(){
+    if(localStorage.getItem('location')){
+      this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
+    }
+  }
+  subscribe(){
+    if(this.keyupSubscription){
+      this.keyupSubscription.unsubscribe();
+    }
+    
     this.keyupSubscription = fromEvent(this.filter.nativeElement, 'keyup')
     .pipe(
       debounceTime(1000),
@@ -87,6 +115,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
       map(value => value.trim()),
       tap(value => {
         if (value.length <= 0) {
+          this.subscribe();
           this.searchData = [];
         }
       }),
@@ -99,21 +128,5 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
       } 
       
     })
-  }
-  
-  changeLocation(item: any){
-    this.searchData = [];
-    this.filter.nativeElement.value = ''
-    this.store.dispatch(new LoadLocations({locationData: item}));
-
-  }
-  search(value: string){
-    return this.http.get(`https://rapidapi.p.rapidapi.com/v1/geo/cities?minPopulation=50000&namePrefix=${value}`, { headers: this.headers });
-  }
-  
-  homeLocation(){
-    if(localStorage.getItem('location')){
-      this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
-    }
   }
 }
