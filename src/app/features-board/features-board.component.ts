@@ -8,7 +8,7 @@ import { IconService } from '../services/icon.service';
 })
 export class FeaturesBoardComponent implements OnInit {
   @Input() item: any;
-  constructor(private icon: IconService) { }
+  constructor(public icon: IconService) { }
 
   ngOnInit() {
   }

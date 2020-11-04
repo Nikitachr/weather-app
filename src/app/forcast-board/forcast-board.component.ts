@@ -18,7 +18,7 @@ export class ForcastBoardComponent implements OnInit {
   iconId: any;
   data$: Observable<any>;
 
-  constructor(private icon: IconService, private store: Store<AppState>) { }
+  constructor(public icon: IconService, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.isCelsius$ = this.store.select(selectUnits);

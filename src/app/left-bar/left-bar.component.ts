@@ -38,7 +38,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient, 
     private location: LocationService, 
     private store: Store<AppState>, 
-    private icon: IconService) { }
+    public icon: IconService) { }
   
   
   
@@ -95,7 +95,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
       filter(value => value.length > 0),
       distinctUntilChanged(),
       switchMap(value => this.search(value))
-    ).subscribe(res => {
+    ).subscribe((res: any) => {
       if (res) {
         this.searchData = res.data;
         console.log(res);
