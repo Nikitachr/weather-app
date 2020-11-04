@@ -12,6 +12,6 @@ constructor(private http: HttpClient) { }
   
 
   getLocation(ip: any){
-    return this.http.get(`http://api.ipapi.com/${ip.ip}?access_key=${environment.ipApi}&format=1`)
+    return this.http.get(`https://api.ipapi.com/${ip.ip}?access_key=${environment.ipApi}&format=1`)
   }
 }
