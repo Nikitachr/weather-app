@@ -48,7 +48,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     if(localStorage.getItem('location')){
       this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
     } else {
-      this.http.get("http://api.ipify.org/?format=json").subscribe(ip => {
+      this.http.get("https://api.ipify.org/?format=json").subscribe(ip => {
         console.log(ip);
         this.location.getLocation(ip).subscribe(location => {
          localStorage.setItem('location', JSON.stringify(location));
