@@ -23,7 +23,7 @@
     <span>{{isCelsius ? 'C' : 'F'}}</span>
   </div>
   <div class="location">
-    <h2 *ngIf="loc">{{loc.city}}, {{loc.country_name}}</h2>
+    <h2 *ngIf="loc">{{loc.city}}, {{loc.country_name || loc.country}}</h2>
   </div>
   <div class="date flex">
     <span class="day">{{weekday}},</span>

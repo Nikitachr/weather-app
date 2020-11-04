@@ -5,7 +5,6 @@ import { AppState, selectLocation } from 'src/app/reducers';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import * as L from 'leaflet';
-import {fromLonLat} from 'ol/proj';
 
 @Component({
   selector: 'app-map',
@@ -61,7 +60,7 @@ export class MapComponent implements OnInit {
   };
     this.map = L.map('map', {
       center: [this.loc.latitude,this.loc.longitude],
-      zoom: 9,
+      zoom: 8,
       layers: [this.defaultlayer, this.templayer]
     });
     

@@ -39,7 +39,7 @@ export class UvIndexComponent implements OnInit, AfterViewInit {
 
         ctx.beginPath();
         ctx.arc(115, 135, 95, 3.14, parseFloat(calculation.toFixed(2)), false);
-        ctx.strokeStyle = this.perc2color(this.data.current.uvi, 0, 12)
+        ctx.strokeStyle = this.perc2color(this.data.current.uvi, 0, 14)
         ctx.lineWidth = 25;
         ctx.stroke();
       }

@@ -54,8 +54,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
          localStorage.setItem('location', JSON.stringify(location));
           this.store.dispatch(new LoadLocations({locationData: location}));
         }, err => console.log(err));
-      }, err => console.log(err));
-      
+      }, err => console.log(err));   
     }
     
     this.data$ = this.store.select(selectWeather);
@@ -71,6 +70,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     this.location$ = this.store.select(selectLocation)
     this.location$.subscribe(res => {
       this.loc = res;
+      console.log(res);
     });
 
     this.isCelsius$ = this.store.select(selectUnits);
@@ -87,9 +87,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
       map(value => value.trim()),
       tap(value => {
         if (value.length <= 0) {
-          console.log(value)
           this.searchData = [];
-          console.log(this.searchData)
         }
       }),
       filter(value => value.length > 0),
@@ -98,7 +96,6 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     ).subscribe((res: any) => {
       if (res) {
         this.searchData = res.data;
-        console.log(res);
       } 
       
     })
@@ -108,6 +105,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     this.searchData = [];
     this.filter.nativeElement.value = ''
     this.store.dispatch(new LoadLocations({locationData: item}));
+
   }
   search(value: string){
     return this.http.get(`https://rapidapi.p.rapidapi.com/v1/geo/cities?minPopulation=50000&namePrefix=${value}`, { headers: this.headers });
