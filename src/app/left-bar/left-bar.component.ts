@@ -61,7 +61,12 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
          localStorage.setItem('location', JSON.stringify(location));
           this.store.dispatch(new LoadLocations({locationData: location}));
         }, err => console.log(err));
-      }, err => console.log(err));   
+      }, (err) => this.store.dispatch(new LoadLocations({locationData: {
+        city: `Kyiv`,
+        country: `Ukraine`,
+        latitude: `50.4547`,
+        longitude: `30.5238`
+      }})));   
     } 
     
     this.data$ = this.store.select(selectWeather);
@@ -107,9 +112,9 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     if(this.keyupSubscription){
       this.keyupSubscription.unsubscribe();
     }
-    
     this.keyupSubscription = fromEvent(this.filter.nativeElement, 'keyup')
     .pipe(
+      tap(value => this.searchData = []),
       debounceTime(1000),
       map((event: Event) => (<HTMLInputElement>event.target).value),
       map(value => value.trim()),
