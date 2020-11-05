@@ -125,8 +125,9 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
     ).subscribe((res: any) => {
       if (res) {
         this.searchData = res.data;
-      } 
-      
+      } else {
+        this.searchData = []
+      }
     })
   }
 }

@@ -72,7 +72,7 @@ export class RightBarComponent implements OnInit {
       if (res) {
         this.data = res;
         this.daily = res.daily.slice(0, 7);
-        this.hourly = res.hourly.slice(0, 8);
+        this.hourly = res.hourly.filter((value, index) => {return index % 3 == 0}).slice(0, 8);
       }
     }, err => console.log(err));
     this.isCelsius$ = this.store.select(selectUnits);
