@@ -60,7 +60,7 @@ export class MapComponent implements OnInit {
   };
     this.map = L.map('map', {
       center: [this.loc.latitude,this.loc.longitude],
-      zoom: 8,
+      zoom: 9,
       layers: [this.defaultlayer, this.templayer]
     });
     

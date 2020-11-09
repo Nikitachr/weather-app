@@ -8,7 +8,7 @@
 }
 
 .weather-icon{
-    width: 400px;
+    width: 350px;
 }
 
 .search{
@@ -87,7 +87,11 @@
 }
 
 .weather-img{
-    margin-top: 40px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .temperature{

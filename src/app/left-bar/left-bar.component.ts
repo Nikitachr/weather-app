@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { LocationService } from '../services/location.service';
 import { Store, select } from '@ngrx/store';
@@ -30,6 +30,7 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   Weather: any[];
   keyupSubscription: Subscription;
   searchData: any[] = [];
+  @Output() showPopup = new EventEmitter();
   
   headers: HttpHeaders = new HttpHeaders ({ "x-rapidapi-key": "e9de7f3e4amshfb24508bb6d4c77p17ae7bjsn28f9fea38a3f",
   "x-rapidapi-host": "wft-geo-db.p.rapidapi.com" });
@@ -44,31 +45,6 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   
   
   ngOnInit() {
-    
-    
-    if(localStorage.getItem('location')){
-      this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
-    } else {
-      this.http.get("https://api.ipify.org/?format=json").subscribe(ip => {
-        this.location.getLocation(ip).subscribe((res: any) => {
-        var loc = res.loc.split(',');
-        var location = {
-          city: res.city,
-          country: res.country,
-          latitude: loc[0],
-          longitude: loc[1]
-        };
-         localStorage.setItem('location', JSON.stringify(location));
-          this.store.dispatch(new LoadLocations({locationData: location}));
-        }, err => console.log(err));
-      }, (err) => this.store.dispatch(new LoadLocations({locationData: {
-        city: `Kyiv`,
-        country: `Ukraine`,
-        latitude: `50.4547`,
-        longitude: `30.5238`
-      }})));   
-    } 
-    
     this.data$ = this.store.select(selectWeather);
     this.data$.subscribe(res => {
       if (res) {
@@ -106,6 +82,8 @@ export class LeftBarComponent implements OnInit, AfterViewInit {
   homeLocation(){
     if(localStorage.getItem('location')){
       this.store.dispatch(new LoadLocations({locationData: JSON.parse(localStorage.getItem('location'))}));
+    } else {
+      this.showPopup.emit();
     }
   }
   subscribe(){

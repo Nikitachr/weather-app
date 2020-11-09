@@ -27,10 +27,11 @@ import { UvPipe } from './pipes/uv.pipe';
 import { MaxMinTempComponent } from './Max-min-temp/Max-min-temp.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeaturesBoardComponent } from './features-board/features-board.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 @NgModule({
-  declarations: [												
+  declarations: [													
     AppComponent,
       LeftBarComponent,
       RightBarComponent,
@@ -48,7 +49,8 @@ import { FeaturesBoardComponent } from './features-board/features-board.componen
       FahrenheitPipe,
       UvPipe,
       MaxMinTempComponent,
-      FeaturesBoardComponent
+      FeaturesBoardComponent,
+      PopupComponent
    ],
   imports: [
     BrowserModule,

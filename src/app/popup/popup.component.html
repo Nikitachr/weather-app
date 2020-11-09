@@ -1,0 +1,17 @@
+<div class="container flex-centered">
+  <div class="popup flex-centered">
+    <button (click)="onClose.emit()" class="flex-centered"><img class="icon" src="assets/imgs/cross.svg"></button>
+    <h1>Can’t get your geolocation</h1>
+    <h2>Find your city to use it as native location</h2>
+    <div class="search flex">
+      <img class="icon" src="assets/imgs/search.svg">
+      <input  #search type="text" placeholder="search for places ..." >
+    </div>
+    <div *ngIf="searchData.length > 0" class="results">
+      <div *ngFor="let res of searchData" class="result" (mousedown)="changeLocation(res)">
+        <h3 class="city">{{res.city}}</h3>
+        <h3 class="country">{{res.country}}</h3>
+      </div>
+    </div>
+  </div>
+</div>

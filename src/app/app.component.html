@@ -1,4 +1,6 @@
 <div class="flex">
-  <app-left-bar></app-left-bar>
-  <app-right-bar></app-right-bar>
+  <app-popup *ngIf="isPopup" (onClose)="isPopup = false"></app-popup>
+  <app-left-bar (showPopup)="isPopup = true"></app-left-bar>
+  <app-right-bar ></app-right-bar>
+  
 </div>
